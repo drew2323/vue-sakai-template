@@ -1,5 +1,15 @@
+<script setup>
+import LWChart from '@/components/LWChart.vue';
+import PlotlyChart from '@/components/PlotlyChart.vue';
+import PlotlyChart3D from '@/components/PlotlyChart3D.vue';
+import LWSampleCompControl from '@/components/LWSampleCompControl.vue';
+</script>
 <template>
     <div class="card">
+        <LWSampleCompControl />
+        <!-- <LWChart /> -->
+        <PlotlyChart />
+        <PlotlyChart3D />
         <div class="font-semibold text-2xl mb-4">Documentation</div>
         <div class="font-semibold text-xl mb-4">Get Started</div>
         <p class="text-lg mb-4">

@@ -1,6 +1,7 @@
 <script setup>
 import { useLayout } from '@/layout/composables/layout';
 import AppConfigurator from './AppConfigurator.vue';
+import ProfileModal from './ProfileModal.vue';
 
 const { onMenuToggle, toggleDarkMode, isDarkTheme } = useLayout();
 </script>
@@ -55,7 +56,7 @@ const { onMenuToggle, toggleDarkMode, isDarkTheme } = useLayout();
                 class="layout-topbar-menu-button layout-topbar-action"
                 v-styleclass="{ selector: '@next', enterFromClass: 'hidden', enterActiveClass: 'animate-scalein', leaveToClass: 'hidden', leaveActiveClass: 'animate-fadeout', hideOnOutsideClick: true }"
             >
-                <i class="pi pi-ellipsis-v"></i>
+                <i class="pi pi-ellipsis-v">ff</i>
             </button>
 
             <div class="layout-topbar-menu hidden lg:block">
@@ -68,10 +69,21 @@ const { onMenuToggle, toggleDarkMode, isDarkTheme } = useLayout();
                         <i class="pi pi-inbox"></i>
                         <span>Messages</span>
                     </button>
-                    <button type="button" class="layout-topbar-action">
+                    <div class="relative">
+                        <button
+                            v-styleclass="{ selector: '@next', enterFromClass: 'hidden', enterActiveClass: 'animate-scalein', leaveToClass: 'hidden', leaveActiveClass: 'animate-fadeout', hideOnOutsideClick: true }"
+                            type="button"
+                            class="layout-topbar-action"
+                        >
+                            <i class="pi pi-user"></i>
+                            <span>Profile</span>
+                        </button>
+                        <ProfileModal />
+                    </div>
+                    <!-- <button type="button" class="layout-topbar-action">
                         <i class="pi pi-user"></i>
                         <span>Profile</span>
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>

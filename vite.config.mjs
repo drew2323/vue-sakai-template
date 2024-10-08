@@ -8,6 +8,7 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig({
     optimizeDeps: {
+        include: ['plotly.js-dist'],
         noDiscovery: true
     },
     plugins: [
@@ -20,5 +21,8 @@ export default defineConfig({
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
-    }
+    },
+    server: {
+        port: 5150 // Let Vite pick an available port automatically
+      }
 });

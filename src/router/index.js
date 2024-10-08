@@ -1,5 +1,6 @@
 import AppLayout from '@/layout/AppLayout.vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -12,6 +13,11 @@ const router = createRouter({
                     path: '/',
                     name: 'dashboard',
                     component: () => import('@/views/Dashboard.vue')
+                },
+                {
+                    path: '/dashboard2',
+                    name: 'dashboard2',
+                    component: () => import('@/components/Dashboard.vue')
                 },
                 {
                     path: '/uikit/formlayout',
@@ -123,6 +129,16 @@ const router = createRouter({
             component: () => import('@/views/pages/auth/Login.vue')
         },
         {
+            path: '/auth/login2',
+            name: 'login2',
+            component: () => import('@/components/Login.vue')
+        },
+        {
+            path: '/auth/register',
+            name: 'register',
+            component: () => import('@/components/Register.vue')
+        },
+        {
             path: '/auth/access',
             name: 'accessDenied',
             component: () => import('@/views/pages/auth/Access.vue')
@@ -134,5 +150,22 @@ const router = createRouter({
         }
     ]
 });
+
+//meta: { requiresGuest: true }
+//meta: { requiresAuth: true }
+//TBD requires role (currTenant role)
+//TBD requires appwide role
+router.beforeEach((to, from, next) => {
+    const authStore = useAuthStore();
+    const isAuthenticated = authStore.isAuthenticated;
+  
+    if (to.meta.requiresAuth && !isAuthenticated) {
+      next('/auth/login');
+    } else if (to.meta.requiresGuest && isAuthenticated) {
+      next('/');
+    } else {
+      next();
+    }
+  });
 
 export default router;
